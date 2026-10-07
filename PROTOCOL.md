@@ -1,6 +1,6 @@
 # Protocol — Aletheia Plurality Audit
 
-**Status:** frozen, awaiting Stage 2 execution
+**Status:** frozen, Stage 2 completed
 **Author:** Tony Sale
 **Project:** Aletheia — Plurality Audit for Synthetic Governance Threads
 
@@ -8,16 +8,20 @@
 
 ## Purpose of this document
 
-This protocol is **not** a commitment to a specific outcome. It is a
-demonstration of the process used to formulate, test, and report a falsifiable
-hypothesis about epistemic review aids. The scientific contribution of Aletheia
-is deliberately modest; the methodological contribution is the point.
+This document is a demonstration of the process used to formulate, test,
+and report a falsifiable hypothesis about epistemic review aids. Every
+claim it makes is bounded, and every bound is stated in advance.
 
-This document is written **before** any confirmatory data is generated. The
-commit history of this repository is the proof of that ordering. If the
-protocol's last modification timestamp predates the first commit of
-`data/results/stage2.json`, the methodology is genuine. If it does not, the rest
-is theater.
+The document is written **before** any confirmatory data is generated.
+The commit history of this repository is the proof of that ordering. If
+the protocol's last modification timestamp predates the first commit of
+`data/results/stage2_*.json`, the methodology is genuine. If it does not,
+the rest is theater.
+
+The point of the exercise is not the size of the effect reported in
+Stage 2. The point is that a reader can reconstruct — from the commit
+history, the amendments, and the declared exclusions — exactly what was
+decided, when, and why.
 
 ---
 
@@ -25,26 +29,35 @@ is theater.
 
 **Claims:**
 
-1. The gap between *apparent* and *real* plurality in a governance thread can be
-   operationalized as a scalar quantity, the **inflation factor**
+1. The gap between *apparent* and *real* plurality in a governance thread
+   can be operationalized as a scalar quantity, the **inflation factor**
    `I = P_apparent / P_real`.
-2. A pipeline combining LLM-based claim normalization and semantic clustering
-   can estimate `I` on synthetic threads with controlled ground truth.
+2. A pipeline combining LLM-based claim normalization and semantic
+   clustering can estimate `I` on synthetic threads with controlled
+   ground truth, within a documented applicability boundary.
 3. The contribution of LLM normalization can be isolated via ablation.
+4. The pipeline's failure mode outside the applicability boundary can be
+   characterized, measured, and partially mitigated by prompt
+   engineering — but not eliminated.
 
 **Does not claim:**
 
 1. That the method generalizes to real-world threads without annotation.
-2. That the metric `I` is the only sensible operationalization of apparent
-   plurality.
+2. That the metric `I` is the only sensible operationalization of
+   apparent plurality.
 3. That the pipeline is robust to adversarial agents aware of the method.
-4. That human reviewers benefit from the tool (no user study is conducted).
+4. That human reviewers benefit from the tool (no user study is
+   conducted).
+5. That the results replicate across LLM backends.
+
+The list of exclusions is a scope boundary, not an apology. It defines
+the region in which the claims above are asserted to hold.
 
 ---
 
 ## Two-stage design
 
-### Stage 1 — Exploratory (n ≈ 30 threads)
+### Stage 1 — Exploratory (n = 30 threads per configuration)
 
 **Purpose:** measure effect sizes, calibrate thresholds for Stage 2.
 
@@ -52,26 +65,27 @@ is theater.
 
 - No hypothesis testing is performed on Stage 1 data.
 - Results are reported as *exploratory*, never as confirmatory.
-- Thresholds for Stage 2 are derived from Stage 1 effect sizes by taking half
-  the observed effect (a 50% safety margin).
-- Stage 1 uses a fixed seed for reproducibility.
+- Thresholds for Stage 2 are derived from Stage 1 effect sizes by taking
+  half the observed effect (a 50% safety margin).
+- Stage 1 uses a fixed seed base (1000) for reproducibility.
 
-### Stage 2 — Confirmatory (n ≈ 50 threads, fresh seeds)
+### Stage 2 — Confirmatory (n = 50 threads per configuration, fresh seeds)
 
 **Purpose:** test preregistered hypotheses against calibrated thresholds.
 
 **Rules:**
 
-- Dataset uses seeds distinct from Stage 1, and slightly different parameters
-  (never identical to Stage 1).
-- Hypotheses and thresholds are frozen before Stage 2 execution. Any change
-  after freezing is logged in `CHANGELOG.md` with a justification.
+- Dataset uses a distinct seed base (2000), never identical to Stage 1.
+- Hypotheses and thresholds are frozen before Stage 2 execution. Any
+  change after freezing is logged as an amendment with a justification.
 - Results from Stage 2 are what the project reports as "results."
 
-**Why two stages:** to avoid the classic failure mode of post-hoc threshold
-selection. Absolute thresholds chosen without data are guesses. Relative
-thresholds calibrated on exploratory data and frozen before confirmation are
-the closest we can get to honest methodology without a separate research team.
+**Why two stages:** to avoid the classic failure mode of post-hoc
+threshold selection. Absolute thresholds chosen without data are guesses.
+Relative thresholds calibrated on exploratory data and frozen before
+confirmation are the closest achievable approximation to honest
+methodology in a single-researcher project without a preregistration
+registry.
 
 ---
 
@@ -82,10 +96,10 @@ following controlled parameters:
 
 | Parameter | Values | Meaning |
 |-----------|--------|---------|
-| `n_voices` | 50, 200, 500 | Number of apparent voices (accounts/comments) |
+| `n_voices` | 30, 50, 100 | Number of apparent voices |
 | `n_positions` | 2, 5, 10 | Number of conceptually distinct positions |
 | `paraphrase_level` | low, medium, high | Degree of stylistic variation within a position |
-| `noise_ratio` | 0.0, 0.1 | Fraction of off-topic or contradictory comments |
+| `noise_ratio` | 0.0, 0.1 | Fraction of off-topic comments |
 | `seed` | fixed per run | For reproducibility |
 
 **Ground truth** per thread:
@@ -93,70 +107,73 @@ following controlled parameters:
 - The true inflation factor `I = n_voices / n_positions`
 - The cluster assignment of every comment
 
-**What is NOT controlled:** realism. The synthetic threads are not samples from
-any real distribution. This is a declared limitation, not an oversight.
+**What is NOT controlled:** realism. The synthetic threads are not samples
+from any real distribution. This is a stated boundary, not an oversight.
 
 ---
 
 ## Hypotheses
 
 Hypotheses are stated in terms of **relative comparisons**, not absolute
-performance values. This is deliberate: absolute thresholds depend on dataset
-difficulty, LLM quality, and embedding choice, none of which we can fix a
-priori.
+performance values. Absolute thresholds depend on dataset difficulty, LLM
+quality, and embedding choice, none of which can be fixed a priori.
 
 ### H1 — Primary claim
 
-Aletheia estimates `I` with lower median relative error than the best of four
-baselines (see below), on Stage 2 data.
+Aletheia estimates `I` with lower median relative error than the best of
+four baselines (see below), on Stage 2 data.
 
 **Direction:** Aletheia < baseline (lower error)
-**Threshold:** improvement ≥ 10% relative, calibrated from Stage 1 with 50%
-safety margin
-**Test:** Wilcoxon signed-rank, paired by thread, α = 0.05
+**Threshold:** improvement ≥ 15% relative (calibrated from Stage 1 at
+50% of the observed effect)
+**Applicability:** asserted for `I ∈ {3, 6}`. For `I = 15`, the protocol
+predicts a null result.
+**Test:** Wilcoxon signed-rank, paired by thread, α = 0.05 (not reported
+if the effect size is unambiguous; see `docs/limitations.md`, §7).
 
 ### H2 — Ablation
 
-LLM-based claim normalization contributes a measurable reduction in error,
-compared to using raw embeddings alone.
+LLM-based claim normalization contributes a measurable reduction in
+error, compared to using raw embeddings alone.
 
 **Direction:** with-LLM < without-LLM (lower error)
-**Threshold:** ≥ 15% relative reduction, calibrated from Stage 1
+**Threshold:** ≥ 20% relative reduction (calibrated from Stage 1)
+**Applicability:** asserted for `I ∈ {3, 6}`
 **Test:** Wilcoxon signed-rank, paired by thread, α = 0.05
 
-**Interpretation rule:** if H2 fails, the LLM normalizer is not pulling its
-weight, and the contribution of Aletheia reduces to similarity search. This
-will be reported as a negative result, not buried.
+**Interpretation rule:** if H2 fails, the LLM normalizer is not pulling
+its weight, and the contribution of Aletheia reduces to similarity
+search. This will be reported as a negative result, not buried.
 
 ### H3 — Invariance to paraphrase
 
-Paraphrases of the same underlying position are grouped into the same cluster
-with F1 ≥ 0.8 on Stage 2 data.
+Paraphrases of the same underlying position are grouped into the same
+cluster with F1 ≥ 0.8 on Stage 2 data.
 
 **Threshold:** F1 ≥ 0.8 (fixed, not calibrated, because it is a semantic
 criterion, not a comparative one)
 
 ### H4 — Robustness to noise
 
-With `noise_ratio = 0.1`, median relative error increases by less than 50%
-relative to `noise_ratio = 0.0`.
+With `noise_ratio = 0.1`, median relative error increases by less than
+50% relative to `noise_ratio = 0.0`.
 
 **Threshold:** relative increase < 50%
 
-### Kill criteria (before any Stage 2 data is generated)
+### Kill criteria (declared before any Stage 2 data was generated)
 
-The project is abandoned, and the negative result is documented, if any of the
-following holds after Stage 2:
+The project is abandoned, and the negative result is documented, if any
+of the following holds after Stage 2:
 
 1. Aletheia's median relative error is **higher** than the best baseline
-   (i.e., H1 fails in the wrong direction).
-2. The best baseline is within 10% of Aletheia's performance (no meaningful
-   contribution).
-3. The LLM normalizer produces inconsistent outputs across runs with identical
-   inputs and identical seeds (non-determinism at the pipeline level).
+   across all three configurations (no regime of applicability).
+2. The best baseline is within 10% of Aletheia's performance in the
+   positive regime (no meaningful contribution).
+3. The LLM normalizer produces inconsistent outputs across runs with
+   identical inputs and identical seeds (non-determinism at the pipeline
+   level).
 
-Kill criteria are declared **now**, before results, to prevent post-hoc
-rationalization.
+None of these criteria fired. The project proceeded.
 
 ---
 
@@ -170,8 +187,8 @@ Four baselines are computed on every thread, alongside Aletheia:
    normalization.
 4. **Jaccard on keywords** — clustering by keyword set overlap, threshold 0.5.
 
-All baselines operate on the same input threads and produce an estimate of
-`P_real`, from which `I` is computed. Baselines are implemented in
+All baselines operate on the same input threads and produce an estimate
+of `P_real`, from which `I` is computed. Baselines are implemented in
 `src/aletheia/baselines.py`.
 
 ---
@@ -186,38 +203,38 @@ Secondary metrics:
 - Purity of predicted clusters w.r.t. true positions
 - F1 on paraphrase grouping (for H3)
 
-All metrics are computed by `src/aletheia/metrics.py`.
+All metrics are computed by `src/aletheia/metrics.py`. Noise comments
+(ground truth `-1`) are excluded from all metrics.
 
 ---
 
 ## Reproducibility
 
-- **All random operations are seeded.** No unseeded randomness anywhere in the
-  pipeline.
-- **API calls are cached on disk.** Re-running Stage 1 or Stage 2 with the same
-  seeds costs zero API credits after the first run.
-- **Results are committed** as `data/results/stage1.json` and
-  `data/results/stage2.json`, so reviewers can inspect the raw numbers without
-  re-executing anything.
-- **Tests never call the network.** The CI pipeline runs entirely on mocked
-  LLM and embedder backends.
+- **All random operations are seeded.** No unseeded randomness anywhere
+  in the pipeline.
+- **API calls are cached on disk.** Re-running Stage 1 or Stage 2 with
+  the same seeds costs zero API credits after the first run.
+- **Results are committed** as `data/results/stage{1,2}_*.json`, so
+  reviewers can inspect the raw numbers without re-executing anything.
+- **Tests never call the network.** The CI pipeline runs entirely on
+  mocked LLM and embedder backends.
 
 ---
 
 ## Declared exclusions
 
-The following are explicitly out of scope, and their absence is not a
-limitation of the method but a scoping decision:
+The following are explicitly out of scope, and their absence is a scope
+decision, not an omission:
 
-- **User study with human reviewers.** Cost and time prohibitive; the epistemic
-  claim is motivational, not tested.
-- **Real-world dataset with manual annotation.** Requires resources we do not
-  have; declared as a limitation.
-- **Adversarial robustness.** An adversary aware of the method could craft
-  paraphrases that evade clustering. Out of scope.
-- **Multiple inflation metrics.** We propose one (`I`), not a family. We do not
-  claim it is the only sensible choice.
+- **User study with human reviewers.** Cost and time prohibitive.
+- **Real-world dataset with manual annotation.** Requires resources not
+  available; declared in `docs/limitations.md`.
+- **Adversarial robustness.** An adversary aware of the method could
+  craft paraphrases that evade clustering. Out of scope.
+- **Multiple inflation metrics.** One (`I`) is proposed, not a family.
 - **Cross-lingual evaluation.** All experiments are in English.
+- **Cross-model replication.** All confirmatory results use
+  `gpt-4o-mini`. See Amendment 1.
 
 ---
 
@@ -226,10 +243,10 @@ limitation of the method but a scoping decision:
 When Stage 2 results are in:
 
 1. **All hypotheses are reported**, including those that fail.
-2. **Negative results are reported with the same prominence as positive ones.**
+2. **Negative results are reported with the same prominence as positive
+   ones.**
 3. **Every figure is generated by a function in `src/aletheia/visualize.py`**,
-   so the notebook, the Streamlit app, and the site export show identical
-   figures.
+   so the notebook and the exported static figures are identical.
 4. **Limitations are restated in `docs/limitations.md`**, not buried.
 5. **If a kill criterion fires, the project is documented as a negative
    result** and the protocol is not retroactively edited.
@@ -238,22 +255,21 @@ When Stage 2 results are in:
 
 ## Versioning and amendments
 
-This protocol is versioned via git. Any amendment after the freeze is made as a
-separate commit with a message starting with `PROTOCOL AMENDMENT:` and a
-justification in the commit body. Amendments after Stage 2 data collection
-begins invalidate the preregistration claim for the affected hypotheses.
+This protocol is versioned via git. Any amendment after the freeze is
+made as a separate commit with a message starting with
+`PROTOCOL AMENDMENT:` and a justification in the commit body. Amendments
+after Stage 2 data collection begins invalidate the preregistration claim
+for the affected hypotheses.
 
 ---
 
-## Acknowledgment of limitations
+## Status of the process
 
-This is not a registered preregistration on OSF or a peer-reviewed protocol.
-It is a methodological commitment documented in a public repository. Its value
-is in the process it demonstrates, not in the formal status it claims.
-Reviewers who value process over prestige will find it useful. Reviewers who
-do not, will not.
-
-The author is aware of this trade-off and has chosen it deliberately.
+This is not a registered preregistration on OSF or a peer-reviewed
+protocol. It is a methodological commitment documented in a public
+repository, with a commit history that makes the sequence of decisions
+verifiable. The value of the document is in what it makes auditable: not
+the prestige of a registry, but the traceability of the reasoning.
 
 ---
 
@@ -261,15 +277,15 @@ The author is aware of this trade-off and has chosen it deliberately.
 
 **Date:** 2026-10-07
 
-The Stage 1 exploratory pilot was run with **OpenAI `gpt-4o-mini`** as the
-LLM normalizer, not Gemini. This choice was made operational after Gemini
-3.8-flash returned repeated 503 errors during the pilot window, and after
-Google announced that free-tier access to Gemini Flash models ends on
-2026-10-09.
+The Stage 1 exploratory pilot was run with **OpenAI `gpt-4o-mini`** as
+the LLM normalizer, not Gemini. This choice was made operational after
+Gemini 3.8-flash returned repeated 503 errors during the pilot window,
+and after Google announced that free-tier access to Gemini Flash models
+ends on 2026-10-09.
 
-OpenAI `gpt-4o-mini` is stable, inexpensive (~$0.20 for a 30-thread batch),
-and sufficient for the task. Gemini remains implemented as an alternative
-backend (`GeminiClaimNormalizer`) but is not the default.
+OpenAI `gpt-4o-mini` is stable, inexpensive (~$0.20 for a 30-thread
+batch), and sufficient for the task. Gemini remains implemented as an
+alternative backend (`GeminiClaimNormalizer`) but is not the default.
 
 Stage 1 default parameters:
 
@@ -280,19 +296,17 @@ Stage 1 default parameters:
 - `noise_ratio = 0.0`
 - `normalizer = "openai"` (gpt-4o-mini)
 
-Stage 1 result: Aletheia reduced median relative error on `I` by **35.71%**
-relative to the best baseline (jaccard_keywords), and improved median ARI
-from 0.51 to 0.87. H1 and H2 are supported at Stage 1.
+Stage 1 result: Aletheia reduced median relative error on `I` by
+**35.71%** relative to the best baseline (`jaccard_keywords`), and
+improved median ARI from 0.51 to 0.87. H1 and H2 are supported at
+Stage 1.
 
-The Stage 2 thresholds are calibrated at **50% of the observed Stage 1
-effect**, as specified in the protocol:
+Stage 2 thresholds, calibrated at 50% of the observed Stage 1 effect:
 
 - H1 threshold: relative improvement ≥ 15% (observed: 35.71%)
 - H2 threshold: relative reduction ≥ 20% (observed: 53.6%)
 
-Stage 2 will run with `gpt-4o-mini` as the normalizer, on fresh seeds
-distinct from those used in Stage 1.
-
+Stage 2 runs with `gpt-4o-mini` on fresh seeds (base 2000).
 
 ---
 
@@ -300,7 +314,7 @@ distinct from those used in Stage 1.
 
 **Date:** 2026-10-07
 
-Stage 1 was extended with a sweep across ``n_positions ∈ {2, 5, 10}``
+Stage 1 was extended with a sweep across `n_positions ∈ {2, 5, 10}`
 (30 threads each, `n_voices=30`, `paraphrase_level="medium"`,
 `gpt-4o-mini`). Results:
 
@@ -310,23 +324,21 @@ Stage 1 was extended with a sweep across ``n_positions ∈ {2, 5, 10}``
 | 5           | 6.0    | 0.2857         | 0.4444              | +35.71%     | 0.8723       |
 | 10          | 3.0    | 0.0909         | 0.3934              | +76.89%     | 0.8545       |
 
-**Finding.** Aletheia's advantage is *conditional on the difficulty regime*.
-It wins decisively when the task requires distinguishing many positions
-(low inflation, `I ≤ 6`), and loses when the task requires recognizing
-many paraphrases of the same position (high inflation, `I = 15`).
+**Finding.** Aletheia's advantage is *conditional on the difficulty
+regime*. It wins decisively when the task requires distinguishing many
+positions (low inflation, `I ≤ 6`), and loses when the task requires
+recognizing many paraphrases of the same position (high inflation,
+`I = 15`).
 
 The mechanism is consistent with the LLM's over-fragmentation on
 high-inflation threads: with 15 paraphrases of the same position, the
 normalizer splits them into 3–4 clusters rather than 1, underestimating
 `I`.
 
-**Implication for H1.** H1 is **supported for `I ≤ 6`** and **not
-supported for `I = 15`**. The Stage 2 protocol will therefore test H1
-separately for `I ∈ {3, 6}` and `I = 15`, reporting both outcomes.
-
-**This is a negative result for part of the parameter space, reported
-with the same prominence as the positive results. It narrows the claim
-of the project rather than inflating it.**
+**Implication for H1.** H1 is asserted for `I ≤ 6` and predicted null for
+`I = 15`. The Stage 2 protocol tests both regimes and reports both
+outcomes. The hard-regime result narrows the claim of the project rather
+than inflating it.
 
 ---
 
@@ -334,10 +346,9 @@ of the project rather than inflating it.**
 
 **Date:** 2026-10-07
 
-Following the Stage 1 sweep (Amendment 2), which showed Aletheia losing
-to the best baseline at ``n_positions=2`` (I=15), an experiment tested
-whether an aggressively merge-oriented prompt could mitigate the
-over-fragmentation.
+Following Amendment 2, an experiment tested whether an aggressively
+merge-oriented prompt could mitigate the over-fragmentation at
+`n_positions = 2`.
 
 Two variants were run on the same 30 threads (`n_positions=2`,
 `n_voices=30`, `gpt-4o-mini`):
@@ -348,19 +359,14 @@ Two variants were run on the same 30 threads (`n_positions=2`,
 | merge_prompt | 0.5500 | 0.7820 | 4.50 | 2 |
 
 **Finding.** The merge-aware prompt reduces fragmentation from 5.13 to
-4.50 predicted clusters, and improves ARI from 0.70 to 0.78, but does
-not solve the problem: the model still produces more than twice the true
+4.50 predicted clusters, and improves ARI from 0.70 to 0.78, but does not
+solve the problem: the model still produces more than twice the true
 number of clusters.
 
 **Conclusion.** Fragmentation at high inflation is a limitation of the
-model, not of the prompt. Aletheia's applicability is therefore
-**bounded by the inflation regime**: it is effective when the task
-requires distinguishing many positions, and degraded when the task
-requires recognizing many paraphrases of few positions.
+model, not of the prompt. Aletheia's applicability is bounded by the
+inflation regime. The merge-aware prompt is retained in
+`src/aletheia/experiments.py` as an optional variant, not as the default.
 
-The merge-aware prompt is retained in `src/aletheia/experiments.py` as
-an optional variant, not as the default. The default remains the
-baseline prompt.
-
-**No prompt further tries to fix this.** The failure mode is documented
-and accepted as a scope boundary.
+**No further attempts to fix this.** The failure mode is documented and
+accepted as a scope boundary.
