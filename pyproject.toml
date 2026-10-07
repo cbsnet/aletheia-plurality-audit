@@ -17,6 +17,7 @@ dependencies = [
     "pandas>=2.2",
     "scikit-learn>=1.5",
     "pyyaml>=6.0",
+    "python-dotenv>=1.0",
 ]
 
 [project.optional-dependencies]
@@ -30,7 +31,6 @@ embeddings = [
 api = [
     "google-genai>=1.0.0",
     "openai>=1.50",
-    "python-dotenv>=1.0",
 ]
 viz = [
     "plotly>=5.24",
@@ -88,6 +88,13 @@ exclude_lines = [
 line-length = 100
 target-version = "py312"
 src = ["src", "tests"]
+exclude = [
+    "notebooks",
+    ".venv",
+    "htmlcov",
+    "build",
+    "dist",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM"]
