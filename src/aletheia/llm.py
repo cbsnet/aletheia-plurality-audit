@@ -13,12 +13,18 @@ Three backends are provided behind a single interface:
 The LLM backends cache every response on disk (keyed by a hash of the
 prompt) so that re-running an evaluation with the same inputs costs
 zero API credits after the first run.
+
+Known limitation: very long prompts (e.g., >50 comments) cause some
+LLMs to enter repetition loops and produce truncated JSON. The
+``max_tokens`` parameter and a clear error message help diagnose this.
+For production use with long threads, batch the input.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from abc import ABC, abstractmethod
 from pathlib import Path
@@ -27,17 +33,20 @@ from typing import Protocol
 from aletheia.config import get_default_normalizer, get_gemini_key, get_openai_key
 
 # ---------------------------------------------------------------------------
+# Default model identifiers
+# ---------------------------------------------------------------------------
+
+DEFAULT_OPENAI_MODEL = os.getenv("ALETHEIA_OPENAI_MODEL", "gpt-4o-mini")
+DEFAULT_GEMINI_MODEL = os.getenv("ALETHEIA_GEMINI_MODEL", "gemini-3.8-flash")
+
+
+# ---------------------------------------------------------------------------
 # Public interface
 # ---------------------------------------------------------------------------
 
 
 class ClaimNormalizer(Protocol):
-    """Assigns each comment to a canonical position index.
-
-    The indices are arbitrary labels local to the call: ``[0, 1, 0, 2]``
-    means the first and third comments share a position, the second and
-    fourth are distinct from each other and from the first.
-    """
+    """Assigns each comment to a canonical position index."""
 
     def normalize(self, comments: list[str]) -> list[int]:
         """Return a list of cluster indices, one per comment."""
@@ -107,7 +116,6 @@ def _cluster_by_similarity(
             if _jaccard(token_sets[i], token_sets[j]) >= threshold:
                 union(i, j)
 
-    # Relabel into contiguous indices in order of first appearance.
     labels: list[int] = []
     seen: dict[int, int] = {}
     for i in range(n):
@@ -148,7 +156,8 @@ Do not decide how many clusters there should be. Let the data decide.
 
 Return your answer as a JSON object with a single key "clusters" whose
 value is a list of lists of comment indices. Every comment index from 0
-to {last} must appear in exactly one cluster.
+to {last} must appear in exactly one cluster. Do not repeat any index
+and do not repeat any cluster.
 
 Example output format:
 {{"clusters": [[0, 5, 12], [1, 3], [2], [4, 7, 8, 9, 10, 11]]}}
@@ -160,8 +169,13 @@ Your JSON answer:"""
 
 
 def _extract_json(text: str) -> dict:
-    """Extract the first JSON object from a possibly noisy LLM response."""
-    # Strip markdown code fences if present.
+    """Extract the first JSON object from a possibly noisy LLM response.
+
+    Raises:
+        ValueError: If no complete JSON object can be found. The error
+            message includes the length of the response and the last
+            characters, to help diagnose truncation.
+    """
     fenced = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
     if fenced:
         text = fenced.group(1)
@@ -169,7 +183,12 @@ def _extract_json(text: str) -> dict:
         start = text.find("{")
         end = text.rfind("}")
         if start == -1 or end == -1 or end <= start:
-            raise ValueError(f"No JSON object found in LLM response: {text!r}")
+            preview = text[-200:] if len(text) > 200 else text
+            raise ValueError(
+                f"No complete JSON object found in LLM response. "
+                f"Response length: {len(text)} chars. "
+                f"Last 200 chars: {preview!r}"
+            )
         text = text[start : end + 1]
     return json.loads(text)
 
@@ -177,17 +196,19 @@ def _extract_json(text: str) -> dict:
 def _clusters_to_labels(clusters: list[list[int]], n: int) -> list[int]:
     """Convert a list of index clusters into a flat label list of length n.
 
-    Indices outside ``[0, n)`` are ignored. Comments not mentioned in any
-    cluster are assigned their own singleton cluster.
+    Duplicate indices are ignored: the first cluster mentioning an index
+    wins. Indices outside ``[0, n)`` are ignored. Comments not mentioned
+    in any cluster are assigned their own singleton cluster.
     """
     labels = [-1] * n
     next_label = 0
     for cluster in clusters:
-        for idx in cluster:
-            if 0 <= idx < n:
-                labels[idx] = next_label
+        valid_indices = [idx for idx in cluster if 0 <= idx < n and labels[idx] == -1]
+        if not valid_indices:
+            continue
+        for idx in valid_indices:
+            labels[idx] = next_label
         next_label += 1
-    # Any comment not mentioned gets its own singleton cluster.
     for i in range(n):
         if labels[i] == -1:
             labels[i] = next_label
@@ -237,12 +258,14 @@ class OpenAIClaimNormalizer(_LLMClaimNormalizerBase):
     def __init__(
         self,
         api_key: str,
-        model: str = "gpt-4o-mini",
+        model: str = DEFAULT_OPENAI_MODEL,
         cache_dir: Path | None = None,
+        max_tokens: int = 4096,
     ) -> None:
         super().__init__(cache_dir=cache_dir)
         self.api_key = api_key
         self.model = model
+        self.max_tokens = max_tokens
 
     def _call_api(self, prompt: str) -> str:
         from openai import OpenAI
@@ -252,6 +275,7 @@ class OpenAIClaimNormalizer(_LLMClaimNormalizerBase):
             model=self.model,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.0,
+            max_tokens=self.max_tokens,
             response_format={"type": "json_object"},
         )
         content = response.choices[0].message.content
@@ -266,21 +290,31 @@ class GeminiClaimNormalizer(_LLMClaimNormalizerBase):
     def __init__(
         self,
         api_key: str,
-        model: str = "gemini-2.0-flash",
+        model: str = DEFAULT_GEMINI_MODEL,
         cache_dir: Path | None = None,
+        max_output_tokens: int = 4096,
     ) -> None:
         super().__init__(cache_dir=cache_dir)
         self.api_key = api_key
         self.model = model
+        self.max_output_tokens = max_output_tokens
 
     def _call_api(self, prompt: str) -> str:
         from google import genai
+        from google.genai import types
 
         client = genai.Client(api_key=self.api_key)
         response = client.models.generate_content(
             model=self.model,
             contents=prompt,
-            config={"temperature": 0.0, "response_mime_type": "application/json"},
+            config=types.GenerateContentConfig(
+                temperature=0.0,
+                max_output_tokens=self.max_output_tokens,
+                response_mime_type="application/json",
+                automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                    disable=True
+                ),
+            ),
         )
         text = response.text
         if not text:
@@ -294,18 +328,7 @@ class GeminiClaimNormalizer(_LLMClaimNormalizerBase):
 
 
 def get_normalizer(name: str | None = None) -> ClaimNormalizer:
-    """Return the normalizer selected by ``name`` or by config.
-
-    Args:
-        name: One of ``"mock"``, ``"openai"``, ``"gemini"``. If ``None``,
-            falls back to the ``ALETHEIA_NORMALIZER`` environment variable
-            (default: ``"mock"``).
-
-    Raises:
-        RuntimeError: If the selected backend requires an API key that is
-            not configured.
-        ValueError: If ``name`` is not a known backend.
-    """
+    """Return the normalizer selected by ``name`` or by config."""
     name = name or get_default_normalizer()
     if name == "mock":
         return MockClaimNormalizer()
