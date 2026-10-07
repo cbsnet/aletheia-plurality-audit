@@ -102,7 +102,7 @@ def test_extract_json_with_surrounding_text() -> None:
 
 def test_extract_json_invalid_raises() -> None:
     """No JSON object -> ValueError."""
-    with pytest.raises(ValueError, match="No JSON object found"):
+    with pytest.raises(ValueError, match="No complete JSON object found"):
         _extract_json("no json here at all")
 
 

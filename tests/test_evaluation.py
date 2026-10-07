@@ -165,7 +165,7 @@ def test_make_pilot_batch_defaults() -> None:
     """Default pilot batch has the PROTOCOL parameters."""
     batch = make_pilot_batch()
     assert len(batch) == 30
-    assert all(t.n_voices == 100 for t in batch)
+    assert all(t.n_voices == 30 for t in batch)
     assert all(t.n_positions == 5 for t in batch)
     assert all(t.paraphrase_level == "medium" for t in batch)
 
