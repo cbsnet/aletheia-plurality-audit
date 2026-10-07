@@ -1,0 +1,1935 @@
+{
+  "config": {
+    "n_threads": 30,
+    "n_voices": 30,
+    "n_positions": 5,
+    "paraphrase_level": "medium",
+    "noise_ratio": 0.0,
+    "seed_base": 1000,
+    "normalizer": "openai"
+  },
+  "summary": {
+    "n_threads": 30,
+    "aletheia": {
+      "median_relative_error": 0.28571428571428575,
+      "median_ari": 0.8723349319975988,
+      "median_nmi": 0.9231051276367364
+    },
+    "baselines": {
+      "jaccard_keywords": {
+        "median_relative_error": 0.4444444444444444,
+        "median_ari": 0.5053304904051172,
+        "median_nmi": 0.7729282637590547
+      },
+      "raw_embeddings": {
+        "median_relative_error": 0.6153846153846154,
+        "median_ari": 0.5035644389250878,
+        "median_nmi": 0.7959118805433372
+      },
+      "unique_accounts": {
+        "median_relative_error": 0.8333333333333334,
+        "median_ari": 0.0,
+        "median_nmi": 0.6424087238320491
+      },
+      "unique_comments": {
+        "median_relative_error": 0.6291208791208791,
+        "median_ari": 0.4378563283922463,
+        "median_nmi": 0.7806222983043869
+      }
+    },
+    "best_baseline": "jaccard_keywords",
+    "improvement_over_best_baseline": 0.35714285714285704
+  },
+  "per_thread": [
+    {
+      "seed": 1000,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9149560117302052,
+        "nmi": 0.9469787687346669,
+        "purity": 1.0,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.42857142857142855
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.3266613290632506,
+          "nmi": 0.7516163403020922,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.04444444444444444
+        },
+        "raw_embeddings": {
+          "ari": 0.4226646248085758,
+          "nmi": 0.7718319137107779,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.10064935064935066
+        },
+        "jaccard_keywords": {
+          "ari": 0.4741542625169147,
+          "nmi": 0.7632245129451566,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.29259259259259257
+        }
+      }
+    },
+    {
+      "seed": 1001,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 1.0,
+        "nmi": 1.0,
+        "purity": 1.0,
+        "n_predicted": 5,
+        "n_true": 5,
+        "inflation_predicted": 6.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.0,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.6296168450120815,
+          "nmi": 0.8360994781305513,
+          "purity": 1.0,
+          "n_predicted": 11,
+          "n_true": 5,
+          "inflation_predicted": 2.727272727272727,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5454545454545455,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.6781029263370333,
+          "nmi": 0.8546131017255684,
+          "purity": 1.0,
+          "n_predicted": 10,
+          "n_true": 5,
+          "inflation_predicted": 3.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5,
+          "paraphrase_f1": 0.09090909090909091
+        },
+        "jaccard_keywords": {
+          "ari": 0.6391239422598307,
+          "nmi": 0.8403964317359506,
+          "purity": 0.8,
+          "n_predicted": 6,
+          "n_true": 5,
+          "inflation_predicted": 5.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.16666666666666666,
+          "paraphrase_f1": 0.1111111111111111
+        }
+      }
+    },
+    {
+      "seed": 1002,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8198757763975155,
+        "nmi": 0.9042329291301456,
+        "purity": 1.0,
+        "n_predicted": 8,
+        "n_true": 5,
+        "inflation_predicted": 3.75,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.375,
+        "paraphrase_f1": 0.08333333333333333
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.35962145110410093,
+          "nmi": 0.7577887763071417,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.04444444444444444
+        },
+        "raw_embeddings": {
+          "ari": 0.40725028924026224,
+          "nmi": 0.7714051174740514,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.1761904761904762
+        },
+        "jaccard_keywords": {
+          "ari": 0.5053304904051172,
+          "nmi": 0.7714430913487398,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.07407407407407407
+        }
+      }
+    },
+    {
+      "seed": 1003,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 1.0,
+        "nmi": 1.0,
+        "purity": 1.0,
+        "n_predicted": 5,
+        "n_true": 5,
+        "inflation_predicted": 6.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.0,
+        "paraphrase_f1": 0.2
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.4226646248085758,
+          "nmi": 0.7746430392823873,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.46759085799925065,
+          "nmi": 0.7888774971367802,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.06153846153846154
+        },
+        "jaccard_keywords": {
+          "ari": 0.5053304904051172,
+          "nmi": 0.7813756174174077,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.08333333333333333
+        }
+      }
+    },
+    {
+      "seed": 1004,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8782243551289742,
+        "nmi": 0.9336522460213277,
+        "purity": 1.0,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.5383502170767004,
+          "nmi": 0.8018393003379592,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.5519223859144807,
+          "nmi": 0.8111768487063349,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.041666666666666664
+        },
+        "jaccard_keywords": {
+          "ari": 0.6211055276381909,
+          "nmi": 0.8238558450355109,
+          "purity": 0.8,
+          "n_predicted": 7,
+          "n_true": 5,
+          "inflation_predicted": 4.285714285714286,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.28571428571428575,
+          "paraphrase_f1": 0.0
+        }
+      }
+    },
+    {
+      "seed": 1005,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9586305278174037,
+        "nmi": 0.9727674322305059,
+        "purity": 1.0,
+        "n_predicted": 6,
+        "n_true": 5,
+        "inflation_predicted": 5.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.16666666666666666,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.4378563283922463,
+          "nmi": 0.7845219761397666,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.4378563283922463,
+          "nmi": 0.7845219761397668,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.0
+        },
+        "jaccard_keywords": {
+          "ari": 0.48398576512455516,
+          "nmi": 0.7716321116417,
+          "purity": 0.8666666666666667,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.0
+        }
+      }
+    },
+    {
+      "seed": 1006,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9069699620880723,
+        "nmi": 0.9324659436899292,
+        "purity": 0.9666666666666667,
+        "n_predicted": 6,
+        "n_true": 5,
+        "inflation_predicted": 5.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.16666666666666666,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.4226646248085758,
+          "nmi": 0.7800434775762949,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.5383502170767004,
+          "nmi": 0.804873687269839,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.13888888888888887
+        },
+        "jaccard_keywords": {
+          "ari": 0.4741542625169147,
+          "nmi": 0.7632245129451565,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.0
+        }
+      }
+    },
+    {
+      "seed": 1007,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9586305278174037,
+        "nmi": 0.9727674322305058,
+        "purity": 1.0,
+        "n_predicted": 6,
+        "n_true": 5,
+        "inflation_predicted": 5.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.16666666666666666,
+        "paraphrase_f1": 0.16666666666666666
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.019047619047619046
+        },
+        "unique_comments": {
+          "ari": 0.48214285714285715,
+          "nmi": 0.7922640803610346,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.05128205128205128
+        },
+        "raw_embeddings": {
+          "ari": 0.5106382978723404,
+          "nmi": 0.8048736872698387,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.05555555555555555
+        },
+        "jaccard_keywords": {
+          "ari": 0.5355736413756892,
+          "nmi": 0.7989434120675163,
+          "purity": 0.8,
+          "n_predicted": 7,
+          "n_true": 5,
+          "inflation_predicted": 4.285714285714286,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.28571428571428575,
+          "paraphrase_f1": 0.09523809523809523
+        }
+      }
+    },
+    {
+      "seed": 1008,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9327146171693735,
+        "nmi": 0.9619557571038374,
+        "purity": 1.0,
+        "n_predicted": 6,
+        "n_true": 5,
+        "inflation_predicted": 5.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.16666666666666666,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.49649057997783524,
+          "nmi": 0.7927142767219647,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.5519223859144807,
+          "nmi": 0.8111768487063349,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.06666666666666667
+        },
+        "jaccard_keywords": {
+          "ari": 0.6027397260273972,
+          "nmi": 0.8200183984269453,
+          "purity": 0.8,
+          "n_predicted": 7,
+          "n_true": 5,
+          "inflation_predicted": 4.285714285714286,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.28571428571428575,
+          "paraphrase_f1": 0.0
+        }
+      }
+    },
+    {
+      "seed": 1009,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8495575221238938,
+        "nmi": 0.9236881163757487,
+        "purity": 1.0,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.14285714285714285
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.4528301886792453,
+          "nmi": 0.7783422821834264,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.03571428571428571
+        },
+        "raw_embeddings": {
+          "ari": 0.49649057997783524,
+          "nmi": 0.7927142767219648,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.06153846153846154
+        },
+        "jaccard_keywords": {
+          "ari": 0.5552378476735118,
+          "nmi": 0.7921102478408132,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.125
+        }
+      }
+    },
+    {
+      "seed": 1010,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9238845144356955,
+        "nmi": 0.9488523654640826,
+        "purity": 1.0,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.2857142857142857
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.4226646248085758,
+          "nmi": 0.7746430392823873,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.03571428571428571
+        },
+        "raw_embeddings": {
+          "ari": 0.4528301886792453,
+          "nmi": 0.7866937081110373,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.1512820512820513
+        },
+        "jaccard_keywords": {
+          "ari": 0.5649249870667357,
+          "nmi": 0.7962390393084912,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.14583333333333331
+        }
+      }
+    },
+    {
+      "seed": 1011,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9149560117302052,
+        "nmi": 0.9469787687346668,
+        "purity": 1.0,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.4378563283922463,
+          "nmi": 0.7767603476055297,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.5245901639344263,
+          "nmi": 0.7983705418680024,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.1083916083916084
+        },
+        "jaccard_keywords": {
+          "ari": 0.5355736413756892,
+          "nmi": 0.7906728185959239,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.08333333333333333
+        }
+      }
+    },
+    {
+      "seed": 1012,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9586305278174037,
+        "nmi": 0.9727674322305058,
+        "purity": 1.0,
+        "n_predicted": 6,
+        "n_true": 5,
+        "inflation_predicted": 5.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.16666666666666666,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.35962145110410093,
+          "nmi": 0.7577887763071415,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.05238095238095238
+        },
+        "raw_embeddings": {
+          "ari": 0.4528301886792453,
+          "nmi": 0.7783422821834265,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.13636363636363638
+        },
+        "jaccard_keywords": {
+          "ari": 0.48465266558966075,
+          "nmi": 0.7670569388130987,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.07407407407407407
+        }
+      }
+    },
+    {
+      "seed": 1013,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9149560117302052,
+        "nmi": 0.9469787687346668,
+        "purity": 1.0,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.12987012987012986
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.3432657926102503,
+          "nmi": 0.7546899377808696,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.03333333333333333
+        },
+        "raw_embeddings": {
+          "ari": 0.37573385518590996,
+          "nmi": 0.7661232230248618,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.047619047619047616
+        },
+        "jaccard_keywords": {
+          "ari": 0.4741542625169147,
+          "nmi": 0.7632245129451565,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.12962962962962962
+        }
+      }
+    },
+    {
+      "seed": 1014,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.6905105278338621,
+        "nmi": 0.8433247518214002,
+        "purity": 0.9,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.061224489795918366
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.40725028924026224,
+          "nmi": 0.7725372423808429,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.49649057997783524,
+          "nmi": 0.7939098612345243,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.1212121212121212
+        },
+        "jaccard_keywords": {
+          "ari": 0.4741542625169147,
+          "nmi": 0.7645637888981474,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.07407407407407407
+        }
+      }
+    },
+    {
+      "seed": 1015,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.7786259541984732,
+        "nmi": 0.8846536617012557,
+        "purity": 1.0,
+        "n_predicted": 9,
+        "n_true": 5,
+        "inflation_predicted": 3.3333333333333335,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.4444444444444444,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.5245901639344263,
+          "nmi": 0.8001605144766261,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.06153846153846154
+        },
+        "raw_embeddings": {
+          "ari": 0.5519223859144807,
+          "nmi": 0.8130247726408535,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.18888888888888888
+        },
+        "jaccard_keywords": {
+          "ari": 0.5745173745173745,
+          "nmi": 0.8107384647385814,
+          "purity": 0.8,
+          "n_predicted": 7,
+          "n_true": 5,
+          "inflation_predicted": 4.285714285714286,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.28571428571428575,
+          "paraphrase_f1": 0.0
+        }
+      }
+    },
+    {
+      "seed": 1016,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8397790055248618,
+        "nmi": 0.912792921054215,
+        "purity": 1.0,
+        "n_predicted": 8,
+        "n_true": 5,
+        "inflation_predicted": 3.75,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.375,
+        "paraphrase_f1": 0.23863636363636365
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.019047619047619046
+        },
+        "unique_comments": {
+          "ari": 0.5106382978723404,
+          "nmi": 0.7979138998521498,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.08351648351648353
+        },
+        "raw_embeddings": {
+          "ari": 0.5106382978723404,
+          "nmi": 0.7979138998521499,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.06153846153846154
+        },
+        "jaccard_keywords": {
+          "ari": 0.4952274003368894,
+          "nmi": 0.7723935829915324,
+          "purity": 0.8333333333333334,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.12063492063492065
+        }
+      }
+    },
+    {
+      "seed": 1017,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9149560117302052,
+        "nmi": 0.9469787687346669,
+        "purity": 1.0,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.4226646248085758,
+          "nmi": 0.7812011190324789,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.5106382978723404,
+          "nmi": 0.8030625895269844,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.18686868686868685
+        },
+        "jaccard_keywords": {
+          "ari": 0.46354733405875953,
+          "nmi": 0.7607561736254507,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.0
+        }
+      }
+    },
+    {
+      "seed": 1018,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.7837757232329258,
+        "nmi": 0.8707387437253133,
+        "purity": 0.9666666666666667,
+        "n_predicted": 8,
+        "n_true": 5,
+        "inflation_predicted": 3.75,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.375,
+        "paraphrase_f1": 0.13286713286713286
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.3916083916083916,
+          "nmi": 0.7629559877095461,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.03333333333333333
+        },
+        "raw_embeddings": {
+          "ari": 0.4226646248085758,
+          "nmi": 0.7746430392823874,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.11904761904761904
+        },
+        "jaccard_keywords": {
+          "ari": 0.5053304904051172,
+          "nmi": 0.7714430913487398,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.18518518518518517
+        }
+      }
+    },
+    {
+      "seed": 1019,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8298857672121025,
+        "nmi": 0.9071192201756233,
+        "purity": 1.0,
+        "n_predicted": 8,
+        "n_true": 5,
+        "inflation_predicted": 3.75,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.375,
+        "paraphrase_f1": 0.125
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.46759085799925065,
+          "nmi": 0.7888774971367801,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.06153846153846154
+        },
+        "raw_embeddings": {
+          "ari": 0.5785182559376107,
+          "nmi": 0.8142824558439298,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.15
+        },
+        "jaccard_keywords": {
+          "ari": 0.46219686162624823,
+          "nmi": 0.7562539350972337,
+          "purity": 0.8333333333333334,
+          "n_predicted": 10,
+          "n_true": 5,
+          "inflation_predicted": 3.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5,
+          "paraphrase_f1": 0.09915966386554623
+        }
+      }
+    },
+    {
+      "seed": 1020,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.6975228161668839,
+        "nmi": 0.8330291223644566,
+        "purity": 0.9666666666666667,
+        "n_predicted": 10,
+        "n_true": 5,
+        "inflation_predicted": 3.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.5,
+        "paraphrase_f1": 0.09090909090909091
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.3916083916083916,
+          "nmi": 0.7629559877095461,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.04444444444444444
+        },
+        "raw_embeddings": {
+          "ari": 0.48214285714285715,
+          "nmi": 0.7837946038311082,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.17207792207792208
+        },
+        "jaccard_keywords": {
+          "ari": 0.4950442003750335,
+          "nmi": 0.7709280469066873,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.14814814814814814
+        }
+      }
+    },
+    {
+      "seed": 1021,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8064320388349514,
+        "nmi": 0.8862661922684496,
+        "purity": 0.9666666666666667,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.08571428571428572
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.4226646248085758,
+          "nmi": 0.781201119032479,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.038461538461538464
+        },
+        "raw_embeddings": {
+          "ari": 0.4528301886792453,
+          "nmi": 0.7934583062494136,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.05555555555555555
+        },
+        "jaccard_keywords": {
+          "ari": 0.48465266558966075,
+          "nmi": 0.7748384258495736,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.14583333333333331
+        }
+      }
+    },
+    {
+      "seed": 1022,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8397790055248618,
+        "nmi": 0.912792921054215,
+        "purity": 1.0,
+        "n_predicted": 8,
+        "n_true": 5,
+        "inflation_predicted": 3.75,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.375,
+        "paraphrase_f1": 0.1
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.019047619047619046
+        },
+        "unique_comments": {
+          "ari": 0.3916083916083916,
+          "nmi": 0.7629559877095461,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.05333333333333334
+        },
+        "raw_embeddings": {
+          "ari": 0.48214285714285715,
+          "nmi": 0.7837946038311083,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.10064935064935066
+        },
+        "jaccard_keywords": {
+          "ari": 0.48465266558966075,
+          "nmi": 0.7670569388130988,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.08888888888888889
+        }
+      }
+    },
+    {
+      "seed": 1023,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.7940722445199135,
+        "nmi": 0.8833211267734413,
+        "purity": 0.9666666666666667,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.0
+        },
+        "unique_comments": {
+          "ari": 0.4528301886792453,
+          "nmi": 0.773504738575075,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.5106382978723404,
+          "nmi": 0.7893238518534814,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.10064935064935066
+        },
+        "jaccard_keywords": {
+          "ari": 0.5053304904051172,
+          "nmi": 0.773462944526577,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.10582010582010581
+        }
+      }
+    },
+    {
+      "seed": 1024,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8687782805429864,
+        "nmi": 0.9225221388977239,
+        "purity": 1.0,
+        "n_predicted": 8,
+        "n_true": 5,
+        "inflation_predicted": 3.75,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.375,
+        "paraphrase_f1": 0.125
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.02857142857142857
+        },
+        "unique_comments": {
+          "ari": 0.46759085799925065,
+          "nmi": 0.7888774971367801,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.13846153846153847
+        },
+        "raw_embeddings": {
+          "ari": 0.5519223859144807,
+          "nmi": 0.8111768487063349,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.14242424242424243
+        },
+        "jaccard_keywords": {
+          "ari": 0.5255936675461741,
+          "nmi": 0.7880240540846575,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.1
+        }
+      }
+    },
+    {
+      "seed": 1025,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.7463556851311953,
+        "nmi": 0.8667921589967186,
+        "purity": 1.0,
+        "n_predicted": 10,
+        "n_true": 5,
+        "inflation_predicted": 3.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.5,
+        "paraphrase_f1": 0.06666666666666667
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.46759085799925065,
+          "nmi": 0.7816388268617447,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.047619047619047616
+        },
+        "raw_embeddings": {
+          "ari": 0.5383502170767004,
+          "nmi": 0.7991252320986015,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.1282051282051282
+        },
+        "jaccard_keywords": {
+          "ari": 0.4714016341923319,
+          "nmi": 0.7647343689344194,
+          "purity": 0.9,
+          "n_predicted": 10,
+          "n_true": 5,
+          "inflation_predicted": 3.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5,
+          "paraphrase_f1": 0.02857142857142857
+        }
+      }
+    },
+    {
+      "seed": 1026,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.8758915834522111,
+        "nmi": 0.9183022966915175,
+        "purity": 0.9666666666666667,
+        "n_predicted": 6,
+        "n_true": 5,
+        "inflation_predicted": 5.0,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.16666666666666666,
+        "paraphrase_f1": 0.15151515151515152
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.3916083916083916,
+          "nmi": 0.7629559877095461,
+          "purity": 1.0,
+          "n_predicted": 15,
+          "n_true": 5,
+          "inflation_predicted": 2.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6666666666666666,
+          "paraphrase_f1": 0.03333333333333333
+        },
+        "raw_embeddings": {
+          "ari": 0.4528301886792453,
+          "nmi": 0.7783422821834264,
+          "purity": 1.0,
+          "n_predicted": 14,
+          "n_true": 5,
+          "inflation_predicted": 2.142857142857143,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6428571428571429,
+          "paraphrase_f1": 0.06493506493506493
+        },
+        "jaccard_keywords": {
+          "ari": 0.5053304904051172,
+          "nmi": 0.7714430913487398,
+          "purity": 0.8,
+          "n_predicted": 9,
+          "n_true": 5,
+          "inflation_predicted": 3.3333333333333335,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.4444444444444444,
+          "paraphrase_f1": 0.05555555555555555
+        }
+      }
+    },
+    {
+      "seed": 1027,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.9149560117302052,
+        "nmi": 0.9469787687346669,
+        "purity": 1.0,
+        "n_predicted": 7,
+        "n_true": 5,
+        "inflation_predicted": 4.285714285714286,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.28571428571428575,
+        "paraphrase_f1": 0.6883116883116883
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.02857142857142857
+        },
+        "unique_comments": {
+          "ari": 0.49649057997783524,
+          "nmi": 0.7944789480864471,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.18461538461538465
+        },
+        "raw_embeddings": {
+          "ari": 0.5519223859144807,
+          "nmi": 0.811176848706335,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.23964646464646466
+        },
+        "jaccard_keywords": {
+          "ari": 0.5745173745173745,
+          "nmi": 0.7989434120675166,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.37083333333333335
+        }
+      }
+    },
+    {
+      "seed": 1028,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.7463556851311953,
+        "nmi": 0.8782666337066128,
+        "purity": 1.0,
+        "n_predicted": 9,
+        "n_true": 5,
+        "inflation_predicted": 3.3333333333333335,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.4444444444444444,
+        "paraphrase_f1": 0.0
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.009523809523809523
+        },
+        "unique_comments": {
+          "ari": 0.4528301886792453,
+          "nmi": 0.7866937081110374,
+          "purity": 1.0,
+          "n_predicted": 13,
+          "n_true": 5,
+          "inflation_predicted": 2.3076923076923075,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.6153846153846154,
+          "paraphrase_f1": 0.0
+        },
+        "raw_embeddings": {
+          "ari": 0.49649057997783524,
+          "nmi": 0.8013786828122937,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.12222222222222223
+        },
+        "jaccard_keywords": {
+          "ari": 0.5649249870667357,
+          "nmi": 0.7962390393084912,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.08333333333333333
+        }
+      }
+    },
+    {
+      "seed": 1029,
+      "n_voices": 30,
+      "n_positions": 5,
+      "true_inflation": 6.0,
+      "aletheia": {
+        "ari": 0.7572440437862202,
+        "nmi": 0.8883486461545055,
+        "purity": 1.0,
+        "n_predicted": 8,
+        "n_true": 5,
+        "inflation_predicted": 3.75,
+        "inflation_true": 6.0,
+        "relative_error_inflation": 0.375,
+        "paraphrase_f1": 0.08333333333333333
+      },
+      "baselines": {
+        "unique_accounts": {
+          "ari": 0.0,
+          "nmi": 0.6424087238320491,
+          "purity": 1.0,
+          "n_predicted": 30,
+          "n_true": 5,
+          "inflation_predicted": 1.0,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.8333333333333334,
+          "paraphrase_f1": 0.019047619047619046
+        },
+        "unique_comments": {
+          "ari": 0.5653104925053534,
+          "nmi": 0.8147580308932496,
+          "purity": 1.0,
+          "n_predicted": 12,
+          "n_true": 5,
+          "inflation_predicted": 2.5,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5833333333333334,
+          "paraphrase_f1": 0.023809523809523808
+        },
+        "raw_embeddings": {
+          "ari": 0.5785182559376107,
+          "nmi": 0.8244006936339143,
+          "purity": 1.0,
+          "n_predicted": 11,
+          "n_true": 5,
+          "inflation_predicted": 2.727272727272727,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.5454545454545455,
+          "paraphrase_f1": 0.045454545454545456
+        },
+        "jaccard_keywords": {
+          "ari": 0.5454545454545454,
+          "nmi": 0.7926539940588296,
+          "purity": 0.8,
+          "n_predicted": 8,
+          "n_true": 5,
+          "inflation_predicted": 3.75,
+          "inflation_true": 6.0,
+          "relative_error_inflation": 0.375,
+          "paraphrase_f1": 0.03571428571428571
+        }
+      }
+    }
+  ]
+}

@@ -178,7 +178,7 @@ def summarize_results(results: list[ThreadResult]) -> dict[str, object]:
 
 def make_pilot_batch(
     n_threads: int = 30,
-    n_voices: int = 100,
+    n_voices: int = 30,
     n_positions: int = 5,
     paraphrase_level: str = "medium",
     noise_ratio: float = 0.0,

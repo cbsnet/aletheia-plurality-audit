@@ -254,3 +254,41 @@ Reviewers who value process over prestige will find it useful. Reviewers who
 do not, will not.
 
 The author is aware of this trade-off and has chosen it deliberately.
+
+---
+
+## Amendment 1 — Normalizer choice (Stage 1)
+
+**Date:** 2026-10-07
+
+The Stage 1 exploratory pilot was run with **OpenAI `gpt-4o-mini`** as the
+LLM normalizer, not Gemini. This choice was made operational after Gemini
+3.8-flash returned repeated 503 errors during the pilot window, and after
+Google announced that free-tier access to Gemini Flash models ends on
+2026-10-09.
+
+OpenAI `gpt-4o-mini` is stable, inexpensive (~$0.20 for a 30-thread batch),
+and sufficient for the task. Gemini remains implemented as an alternative
+backend (`GeminiClaimNormalizer`) but is not the default.
+
+Stage 1 default parameters:
+
+- `n_threads = 30`
+- `n_voices = 30`
+- `n_positions = 5`
+- `paraphrase_level = "medium"`
+- `noise_ratio = 0.0`
+- `normalizer = "openai"` (gpt-4o-mini)
+
+Stage 1 result: Aletheia reduced median relative error on `I` by **35.71%**
+relative to the best baseline (jaccard_keywords), and improved median ARI
+from 0.51 to 0.87. H1 and H2 are supported at Stage 1.
+
+The Stage 2 thresholds are calibrated at **50% of the observed Stage 1
+effect**, as specified in the protocol:
+
+- H1 threshold: relative improvement ≥ 15% (observed: 35.71%)
+- H2 threshold: relative reduction ≥ 20% (observed: 53.6%)
+
+Stage 2 will run with `gpt-4o-mini` as the normalizer, on fresh seeds
+distinct from those used in Stage 1.
