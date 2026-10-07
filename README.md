@@ -42,6 +42,20 @@ To avoid misplaced expectations, stated upfront:
 If you are looking for a state-of-the-art synthetic-content detector, this is
 not it. If you are evaluating *how someone conducts research*, read on.
 
+
+## Known scope limitation
+
+Aletheia's advantage over the baselines is **conditional on the
+inflation regime**. From the Stage 1 sweep (see `PROTOCOL.md`,
+Amendment 2):
+
+- For threads with many positions relative to voices (`I ≤ 6`),
+  Aletheia reduces error by 36–77% relative to the best baseline.
+- For threads with few positions and many paraphrases (`I = 15`),
+  Aletheia is *worse* than the best baseline by 20%, due to LLM
+  over-fragmentation.
+
+This is a documented limitation, not a hidden one.
 ---
 
 ## For reviewers — the 15-minute path
@@ -125,19 +139,25 @@ Declared explicitly, because honest limitations are part of the deliverable:
 - **Synthetic-only evaluation.** The dataset is generated with controlled
   ground truth. This isolates variables of interest but does not demonstrate
   real-world validity.
+- **Bounded inflation regime.** Aletheia's advantage over the baselines is
+  conditional on the thread's inflation factor `I`. From the Stage 1 sweep:
+  - For `I ≤ 6` (many positions relative to voices), Aletheia reduces
+    median relative error by 36–77% versus the best baseline.
+  - For `I = 15` (few positions, many paraphrases), Aletheia is *worse*
+    than the best baseline by 20%. A prompt-engineering intervention
+    reduced fragmentation but did not eliminate it. See `PROTOCOL.md`,
+    Amendment 3.
 - **No human user study.** The epistemic claim (that Aletheia aids human
   reviewers) is motivational, not empirically tested.
 - **No adversarial robustness.** An adversary aware of the method could
   defeat it. Out of scope.
-- **Single inflation metric.** `I` is one operationalization among many. We
-  do not claim it is the only sensible one.
-- **LLM dependence.** Results depend on the quality and stability of the
-  normalizer. We report ablation results to quantify this dependence.
+- **Single inflation metric.** `I` is one operationalization among many.
+  We do not claim it is the only sensible one.
+- **LLM dependence.** Results depend on the specific model. The Stage 1
+  results use `gpt-4o-mini` via OpenAI. Results with other models may
+  differ; the sweep has not been replicated across models.
 
-See [`docs/limitations.md`](docs/limitations.md) for the full discussion.
-
----
-
+  
 ## Quickstart
 
 Requires Python 3.12.

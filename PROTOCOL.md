@@ -292,3 +292,75 @@ effect**, as specified in the protocol:
 
 Stage 2 will run with `gpt-4o-mini` as the normalizer, on fresh seeds
 distinct from those used in Stage 1.
+
+
+---
+
+## Amendment 2 — Stage 1 sweep and conditional scope of H1
+
+**Date:** 2026-10-07
+
+Stage 1 was extended with a sweep across ``n_positions ∈ {2, 5, 10}``
+(30 threads each, `n_voices=30`, `paraphrase_level="medium"`,
+`gpt-4o-mini`). Results:
+
+| n_positions | I_true | Aletheia error | Best baseline error | Improvement | Aletheia ARI |
+|-------------|--------|----------------|---------------------|-------------|--------------|
+| 2           | 15.0   | 0.6000         | 0.5000              | −20.00%     | 0.7047       |
+| 5           | 6.0    | 0.2857         | 0.4444              | +35.71%     | 0.8723       |
+| 10          | 3.0    | 0.0909         | 0.3934              | +76.89%     | 0.8545       |
+
+**Finding.** Aletheia's advantage is *conditional on the difficulty regime*.
+It wins decisively when the task requires distinguishing many positions
+(low inflation, `I ≤ 6`), and loses when the task requires recognizing
+many paraphrases of the same position (high inflation, `I = 15`).
+
+The mechanism is consistent with the LLM's over-fragmentation on
+high-inflation threads: with 15 paraphrases of the same position, the
+normalizer splits them into 3–4 clusters rather than 1, underestimating
+`I`.
+
+**Implication for H1.** H1 is **supported for `I ≤ 6`** and **not
+supported for `I = 15`**. The Stage 2 protocol will therefore test H1
+separately for `I ∈ {3, 6}` and `I = 15`, reporting both outcomes.
+
+**This is a negative result for part of the parameter space, reported
+with the same prominence as the positive results. It narrows the claim
+of the project rather than inflating it.**
+
+---
+
+## Amendment 3 — Fragmentation experiment
+
+**Date:** 2026-10-07
+
+Following the Stage 1 sweep (Amendment 2), which showed Aletheia losing
+to the best baseline at ``n_positions=2`` (I=15), an experiment tested
+whether an aggressively merge-oriented prompt could mitigate the
+over-fragmentation.
+
+Two variants were run on the same 30 threads (`n_positions=2`,
+`n_voices=30`, `gpt-4o-mini`):
+
+| Variant | Median error | Median ARI | Mean n_predicted | True n |
+|---------|--------------|------------|------------------|--------|
+| baseline_prompt | 0.6000 | 0.7047 | 5.13 | 2 |
+| merge_prompt | 0.5500 | 0.7820 | 4.50 | 2 |
+
+**Finding.** The merge-aware prompt reduces fragmentation from 5.13 to
+4.50 predicted clusters, and improves ARI from 0.70 to 0.78, but does
+not solve the problem: the model still produces more than twice the true
+number of clusters.
+
+**Conclusion.** Fragmentation at high inflation is a limitation of the
+model, not of the prompt. Aletheia's applicability is therefore
+**bounded by the inflation regime**: it is effective when the task
+requires distinguishing many positions, and degraded when the task
+requires recognizing many paraphrases of few positions.
+
+The merge-aware prompt is retained in `src/aletheia/experiments.py` as
+an optional variant, not as the default. The default remains the
+baseline prompt.
+
+**No prompt further tries to fix this.** The failure mode is documented
+and accepted as a scope boundary.
