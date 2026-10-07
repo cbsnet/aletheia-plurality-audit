@@ -184,7 +184,7 @@ necessary for the claim the project makes.
 ## 8. The methodological claim
 
 The scientific contribution of Aletheia is small. The methodological
-contribution is the point: **that a modest project can be structured so
+contribution is the point: **that a project can be structured so
 that its claims are auditable, its limits are declared, and its
 conclusions are testable by a third party without access to the author.**
 
