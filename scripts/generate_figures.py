@@ -1,9 +1,7 @@
 """Generate static figures and interactive HTML from saved results.
 
-Reads the Stage 1 JSON files under ``data/results/`` and produces:
-
-- PNG and SVG versions of the Plotly figures, under ``docs/figures/``
-- Interactive HTML versions, under ``docs/figures/html/``
+Reads the Stage 1 and Stage 2 JSON files under ``data/results/`` and
+produces PNG, SVG, and interactive HTML versions of the Plotly figures.
 
 Requires ``kaleido`` for PNG/SVG export (install with ``pip install -e ".[viz]"``).
 
@@ -89,10 +87,12 @@ def main() -> None:
     _HTML_DIR.mkdir(parents=True, exist_ok=True)
 
     files_to_plot = [
-        ("stage1_openai", _RESULTS_DIR / "stage1_openai.json"),
         ("stage1_npos2", _RESULTS_DIR / "stage1_npos2.json"),
         ("stage1_npos5", _RESULTS_DIR / "stage1_npos5.json"),
         ("stage1_npos10", _RESULTS_DIR / "stage1_npos10.json"),
+        ("stage2_npos2", _RESULTS_DIR / "stage2_npos2.json"),
+        ("stage2_npos5", _RESULTS_DIR / "stage2_npos5.json"),
+        ("stage2_npos10", _RESULTS_DIR / "stage2_npos10.json"),
     ]
 
     for stem, path in files_to_plot:
@@ -102,18 +102,21 @@ def main() -> None:
         results = _thread_results_from_json(path)
         _generate_for(stem, results)
 
-    # Print a summary table for the sweep.
-    sweep_path = _RESULTS_DIR / "stage1_sweep.json"
-    if sweep_path.exists():
-        sweep = json.loads(sweep_path.read_text(encoding="utf-8"))
-        print("\n=== Sweep summary ===")
-        for row in sweep:
-            print(
-                f"n_pos={row['n_positions']:>2}  "
-                f"I_true={row['true_inflation']:>5.1f}  "
-                f"improv={row['improvement']:+.2%}  "
-                f"ARI={row['aletheia_ari']:.4f}"
-            )
+    # Print summary tables.
+    for stage, sweep_file in [
+        ("Stage 1", _RESULTS_DIR / "stage1_sweep.json"),
+        ("Stage 2", _RESULTS_DIR / "stage2_summary.json"),
+    ]:
+        if sweep_file.exists():
+            rows = json.loads(sweep_file.read_text(encoding="utf-8"))
+            print(f"\n=== {stage} summary ===")
+            for row in rows:
+                print(
+                    f"n_pos={row['n_positions']:>2}  "
+                    f"I_true={row['true_inflation']:>5.1f}  "
+                    f"improv={row['improvement']:+.2%}  "
+                    f"ARI={row['aletheia_ari']:.4f}"
+                )
 
     print(f"\nAll figures written to: {_FIGURES_DIR}")
 
