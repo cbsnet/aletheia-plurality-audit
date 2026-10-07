@@ -1,0 +1,32 @@
+[
+  {
+    "n_positions": 2,
+    "true_inflation": 15.0,
+    "aletheia_err": 0.6,
+    "best_baseline_err": 0.5,
+    "best_baseline_name": "jaccard_keywords",
+    "improvement": -0.19999999999999996,
+    "raw_embeddings_err": 0.6,
+    "aletheia_ari": 0.7492795389048992
+  },
+  {
+    "n_positions": 5,
+    "true_inflation": 6.0,
+    "aletheia_err": 0.28571428571428575,
+    "best_baseline_err": 0.4444444444444444,
+    "best_baseline_name": "jaccard_keywords",
+    "improvement": 0.35714285714285704,
+    "raw_embeddings_err": 0.6153846153846154,
+    "aletheia_ari": 0.8723349319975988
+  },
+  {
+    "n_positions": 10,
+    "true_inflation": 3.0,
+    "aletheia_err": 0.09090909090909098,
+    "best_baseline_err": 0.375,
+    "best_baseline_name": "jaccard_keywords",
+    "improvement": 0.7575757575757573,
+    "raw_embeddings_err": 0.5238095238095238,
+    "aletheia_ari": 0.8618264322178105
+  }
+]
