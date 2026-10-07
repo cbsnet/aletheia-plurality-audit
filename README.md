@@ -28,6 +28,10 @@ The gap between apparent and real plurality is operationalized as the
 extracting, clustering, and visualizing the argumentative genealogy of a
 thread, using an LLM normalizer and semantic clustering.
 
+The pilot is intentionally resource-bounded: its purpose is to establish
+whether the measurement problem is tractable and to identify the failure
+modes that a funded validation study should address.
+
 ## What this is not
 
 To avoid misplaced expectations, stated once:
@@ -42,9 +46,9 @@ To avoid misplaced expectations, stated once:
   boundary (see *Limitations* below). Outside that boundary, the best
   naive baseline is a better estimator.
 
-If you are evaluating *how someone conducts research*, read on. If you
-are looking for a state-of-the-art synthetic-content detector, this is
-not it.
+If you are evaluating the research direction behind the project, read on.
+If you are looking for a state-of-the-art synthetic-content detector, this
+is not it.
 
 ---
 
