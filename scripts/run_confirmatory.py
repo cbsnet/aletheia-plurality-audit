@@ -5,12 +5,12 @@ on fresh seeds, distinct from those used in Stage 1.
 
 Frozen hypotheses:
 
-- H1 (positive regime): Aletheia beats the best baseline by ≥ 15%
-  relative on I ∈ {3, 6}.
+- H1 (positive regime): Aletheia beats the best baseline by >= 15%
+  relative on I in {3, 6}.
 - H1 (negative regime): Aletheia is expected NOT to beat the best
   baseline on I = 15 (over-fragmentation, documented in Amendment 3).
-- H2 (ablation): LLM normalization reduces error by ≥ 20% relative to
-  raw embeddings, on I ∈ {3, 6}.
+- H2 (ablation): LLM normalization reduces error by >= 20% relative to
+  raw embeddings, on I in {3, 6}.
 
 Results are written to ``data/results/stage2_*.json`` and the hypothesis
 checks are printed to stdout.
@@ -100,29 +100,38 @@ def _print_hypothesis_table(rows: list[dict]) -> None:
 
     for row in rows:
         n_pos = row["n_positions"]
-        I = row["true_inflation"]
+        inflation = row["true_inflation"]
         improv = row["improvement"]
         al_err = row["aletheia_err"]
         raw_err = row["raw_embeddings_err"]
 
         # H2: relative reduction from raw_embeddings to Aletheia.
-        if raw_err > 0:
-            h2_reduction = (raw_err - al_err) / raw_err
-        else:
-            h2_reduction = 0.0
+        h2_reduction = (
+            (raw_err - al_err) / raw_err if raw_err > 0 else 0.0
+        )
 
         # H1 evaluation depends on the regime.
-        if I <= 6:
-            h1_status = "SUPPORTED" if improv >= H1_POSITIVE_MIN_IMPROVEMENT else "not met"
+        if inflation <= 6:
+            h1_status = (
+                "SUPPORTED"
+                if improv >= H1_POSITIVE_MIN_IMPROVEMENT
+                else "not met"
+            )
         else:
-            # Negative regime: expectation is that improvement is negative
-            # or small. Report as expected if improv < H1 threshold.
-            h1_status = "expected" if improv < H1_POSITIVE_MIN_IMPROVEMENT else "UNEXPECTED WIN"
+            h1_status = (
+                "expected"
+                if improv < H1_POSITIVE_MIN_IMPROVEMENT
+                else "UNEXPECTED WIN"
+            )
 
-        h2_status = "SUPPORTED" if h2_reduction >= H2_MIN_RELATIVE_REDUCTION else "not met"
+        h2_status = (
+            "SUPPORTED"
+            if h2_reduction >= H2_MIN_RELATIVE_REDUCTION
+            else "not met"
+        )
 
         print(
-            f"{n_pos:>6} {I:>8.2f} "
+            f"{n_pos:>6} {inflation:>8.2f} "
             f"{improv:>9.2%} "
             f"{al_err:>14.4f} "
             f"{raw_err:>14.4f} "
@@ -177,10 +186,14 @@ def main() -> None:
                 "n_positions": n_pos,
                 "true_inflation": args.n_voices / n_pos,
                 "aletheia_err": summary["aletheia"]["median_relative_error"],
-                "best_baseline_err": summary["baselines"][best_name]["median_relative_error"],
+                "best_baseline_err": summary["baselines"][best_name][
+                    "median_relative_error"
+                ],
                 "best_baseline_name": best_name,
                 "improvement": summary["improvement_over_best_baseline"],
-                "raw_embeddings_err": summary["baselines"]["raw_embeddings"]["median_relative_error"],
+                "raw_embeddings_err": summary["baselines"]["raw_embeddings"][
+                    "median_relative_error"
+                ],
                 "aletheia_ari": summary["aletheia"]["median_ari"],
             }
         )
