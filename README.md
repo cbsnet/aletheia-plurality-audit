@@ -1,6 +1,6 @@
 # Aletheia — Plurality Audit for Synthetic Governance Threads
 
-> Epistemic review aids for mitigating apparent plurality in synthetic deliberation.
+> A deliberately bounded methodological demonstration designed to make research judgment auditable.
 
 [![CI](https://github.com/cbsnet/aletheia-plurality-audit/actions/workflows/ci.yml/badge.svg)](https://github.com/cbsnet/aletheia-plurality-audit/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -10,37 +10,41 @@
 
 ## What this is
 
-Aletheia is a **methodological portfolio project** in AI Safety and applied
-epistemology. It demonstrates how to formulate, preregister, test, and report a
-falsifiable hypothesis about epistemic review aids — with explicit baselines,
-ablation, kill criteria, and declared limitations.
+Aletheia is a **methodological demonstration** in AI Safety and applied
+epistemology. Its claim is bounded: it proposes a way to measure the gap
+between the *apparent* plurality of voices in a governance thread and the
+*real* plurality of conceptually distinct positions expressed, and it
+demonstrates the measurement on synthetic threads with controlled ground
+truth.
 
-The scientific contribution is deliberately modest. **The methodological
-contribution is the point.**
+The point of the demonstration is not the size of the effect. The point
+is that the **research judgment behind the effect is auditable**: the
+hypotheses are preregistered, the baselines are explicit, the ablation is
+reported, the kill criteria are declared in advance, and the negative
+results are documented with the same prominence as the positive ones.
 
-The project proposes a *plurality audit*: a way to measure the gap between the
-*apparent* plurality of voices in a governance thread (accounts, comments) and
-the *real* plurality of conceptually distinct positions expressed. This gap is
-the **inflation factor** `I = P_apparent / P_real`. Aletheia estimates `I` by
-extracting, clustering, and visualizing the argumentative genealogy of a thread,
-using an LLM normalizer and semantic clustering.
+The gap between apparent and real plurality is operationalized as the
+**inflation factor** `I = P_apparent / P_real`. Aletheia estimates `I` by
+extracting, clustering, and visualizing the argumentative genealogy of a
+thread, using an LLM normalizer and semantic clustering.
 
 ## What this is not
 
-To avoid misplaced expectations, stated upfront:
+To avoid misplaced expectations, stated once:
 
 - **Not a bot detector.** No fingerprinting, no identity verification, no
-  adversarial detection. The project targets the *epistemic vulnerability of
-  the human reviewer*, not the synthetic agent.
-- **Not a paper.** The contribution is too small and the evaluation is
-  synthetic-only. It is not intended for top-tier publication.
-- **Not a funding pitch.** The project exists to demonstrate research process,
-  not to raise money.
-- **Not a production tool.** No user study, no real-world deployment, no
-  robustness against adversaries aware of the method.
+  adversarial detection. The project targets the *epistemic vulnerability
+  of the human reviewer*, not the synthetic agent.
+- **Not a deployed tool.** No user study, no real-world validation, no
+  robustness against adversaries aware of the method. These are scope
+  decisions, not oversights.
+- **Not a general solution.** The method has a documented applicability
+  boundary (see *Limitations* below). Outside that boundary, the best
+  naive baseline is a better estimator.
 
-If you are looking for a state-of-the-art synthetic-content detector, this is
-not it. If you are evaluating *how someone conducts research*, read on.
+If you are evaluating *how someone conducts research*, read on. If you
+are looking for a state-of-the-art synthetic-content detector, this is
+not it.
 
 ---
 
@@ -50,23 +54,23 @@ If you have limited time, follow this path in order:
 
 | Time | Artifact | What to look for |
 |------|----------|------------------|
-| 2 min | This README | Framing and honesty about scope |
+| 2 min | This README | Framing and scope |
 | 3 min | [`PROTOCOL.md`](PROTOCOL.md) | Preregistered hypothesis, kill criteria, commit timestamp |
 | 5 min | [`notebooks/02_confirmatory.ipynb`](notebooks/02_confirmatory.ipynb) | Results vs. baselines, ablation, honest reporting |
 | 2 min | [`src/aletheia/`](src/aletheia/) | Code structure and clarity |
 | 3 min | [`docs/figures/`](docs/figures/) | Exported figures (PNG, SVG, interactive HTML) |
 
 The most important artifact is `PROTOCOL.md` — specifically, its **commit
-timestamp relative to the results**. If the protocol predates the results, the
-methodology is genuine. If it does not, the rest is theater. Check the commit
-history.
+timestamp relative to the results**. If the protocol predates the results,
+the methodology is genuine. If it does not, the rest is theater. Check the
+commit history.
 
 ---
 
 ## Visual outputs
 
-Every result of this project is available in a **visual, no-install form**.
-No reviewer should ever need to clone the repo to evaluate it.
+Every result is available in a **visual, no-install form**. No reviewer
+should ever need to clone the repo to evaluate it.
 
 | Output | Where | Format |
 |--------|-------|--------|
@@ -78,69 +82,56 @@ No reviewer should ever need to clone the repo to evaluate it.
 
 **One source of truth, three presentations.** All evaluation figures are
 generated by a small set of functions in [`src/aletheia/visualize.py`](src/aletheia/visualize.py).
-The same functions power the notebooks, the Streamlit app, and the site export.
-If a figure is wrong, it is wrong in exactly one place — and it is fixed in
-exactly one place.
+The same functions power the notebooks and the exported static figures. If
+a figure is wrong, it is wrong in exactly one place.
 
-The HTML test and coverage reports are published as GitHub Actions artifacts
-on **every** run, including failing runs (`if: always()`), so a reviewer can
-inspect exactly what broke and where. This is a deliberate choice: reproducibility
-without a local setup is a requirement, not a nice-to-have.
+The HTML test and coverage reports are published as GitHub Actions
+artifacts on **every** run, including failing runs, so a reviewer can
+inspect exactly what broke and where.
 
 ---
 
 ## Method — two-stage design
 
-The project uses a **two-stage design** to avoid the classic failure mode of
-post-hoc threshold selection:
+The project uses a **two-stage design** to avoid the classic failure mode
+of post-hoc threshold selection:
 
-1. **Stage 1 — Exploratory (n = 30 threads per configuration).** No hypothesis
-   testing. Measures effect sizes to calibrate thresholds for Stage 2. Results
-   are *not* confirmatory and are reported as such.
-2. **Stage 2 — Confirmatory (n = 50 threads per configuration, fresh seeds).**
-   Tests preregistered hypotheses against calibrated thresholds, with a 50%
-   safety margin. Results from this stage are what the project reports.
+1. **Stage 1 — Exploratory (n = 30 threads per configuration).** No
+   hypothesis testing. Measures effect sizes to calibrate thresholds for
+   Stage 2.
+2. **Stage 2 — Confirmatory (n = 50 threads per configuration, fresh
+   seeds).** Tests preregistered hypotheses against calibrated thresholds,
+   with a 50% safety margin.
 
-**Hypotheses (preregistered in `PROTOCOL.md`):**
+**Results:**
 
-- **H1 (positive regime, `I` ∈ {3, 6})**: Aletheia reduces median relative
-  error on `I` by ≥ 15% versus the best of four baselines. **Supported**
-  (+35.71% and +75.76%).
-- **H1 (negative regime, `I` = 15)**: Aletheia is expected *not* to beat the
-  best baseline, due to over-fragmentation. **Confirmed null** (−20.00%).
-- **H2 (ablation)**: LLM normalization reduces error by ≥ 20% relative to
-  raw embeddings alone, for `I` ∈ {3, 6}. **Supported** (53.57% and 82.64%).
+| Regime | `I` | H1 (vs best baseline) | H2 (vs raw embeddings) |
+|--------|-----|-----------------------|------------------------|
+| Easy   | 3   | **Supported** (+75.76%, threshold 15%) | **Supported** (82.64%, threshold 20%) |
+| Medium | 6   | **Supported** (+35.71%, threshold 15%) | **Supported** (53.57%, threshold 20%) |
+| Hard   | 15  | Confirmed null (−20.00%) | Not met (0.00%) |
 
-Full details, including kill criteria and declared exclusions, are in
-[`PROTOCOL.md`](PROTOCOL.md) (see Amendments 2 and 3).
+The hard-regime result is a **documented scope boundary**: at high
+inflation, the LLM normalizer over-fragments paraphrases and its advantage
+disappears. See `PROTOCOL.md`, Amendments 2 and 3.
 
 ---
 
 ## Limitations
 
-Declared explicitly, because honest limitations are part of the deliverable:
+Declared here in summary. The full discussion is in
+[`docs/limitations.md`](docs/limitations.md).
 
-- **Synthetic-only evaluation.** The dataset is generated with controlled
-  ground truth. This isolates variables of interest but does not demonstrate
-  real-world validity.
-- **Bounded inflation regime.** Aletheia's advantage over the baselines is
-  conditional on the thread's inflation factor `I`. From the Stage 1 and
-  Stage 2 sweeps:
-  - For `I` ≤ 6 (many positions relative to voices), Aletheia reduces
-    median relative error by 36–77% versus the best baseline.
-  - For `I` = 15 (few positions, many paraphrases), Aletheia is *worse*
-    than the best baseline by 20%. A prompt-engineering intervention
-    reduced fragmentation but did not eliminate it. See `PROTOCOL.md`,
-    Amendment 3.
-- **No human user study.** The epistemic claim (that Aletheia aids human
-  reviewers) is motivational, not empirically tested.
-- **No adversarial robustness.** An adversary aware of the method could
-  defeat it. Out of scope.
-- **Single inflation metric.** `I` is one operationalization among many.
-  We do not claim it is the only sensible one.
-- **LLM dependence.** Results depend on the specific model. The reported
-  results use `gpt-4o-mini` via OpenAI. Results with other models may
-  differ; the sweep has not been replicated across models.
+- **Synthetic-only evaluation.** Controlled ground truth, not real-world
+  validation.
+- **Bounded applicability.** The method wins for `I ≤ 6`, loses for `I = 15`.
+- **Single model.** Reported results use `gpt-4o-mini`. Cross-model
+  replication is future work.
+- **No user study.** The epistemic claim is motivational, not tested.
+- **No adversarial robustness.** Out of scope by design.
+
+Each of these is a scope decision, made explicit so that the claim can be
+evaluated precisely.
 
 ---
 
