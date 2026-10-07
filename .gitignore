@@ -57,3 +57,6 @@ NOTES.md
 TODO.md
 # LLM response cache
 .cache/
+
+# pyvis-generated assets
+lib/

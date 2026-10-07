@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use or reference this project, please cite it as below."
+title: "Aletheia — Plurality Audit for Synthetic Governance Threads"
+abstract: >-
+  Aletheia is a methodological portfolio project in AI Safety and
+  applied epistemology. It proposes a plurality audit: a way to measure
+  the gap between the apparent plurality of voices in a governance
+  thread and the real plurality of conceptually distinct positions
+  expressed. The project demonstrates how to formulate, preregister,
+  test, and report a falsifiable hypothesis about epistemic review aids,
+  with explicit baselines, ablation, kill criteria, and declared
+  limitations.
+type: software
+authors:
+  - family-names: Sale
+    given-names: Tony
+    website: https://www.tonysale.com
+repository-code: "https://github.com/cbsnet/aletheia-plurality-audit"
+url: "https://www.tonysale.com"
+license: MIT
+keywords:
+  - ai-safety
+  - epistemology
+  - governance
+  - large-language-models
+  - deliberation
+  - synthetic-consensus
+version: 0.1.0
+date-released: "2026-10-07"
